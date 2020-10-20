@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             ios:Page.UseSafeArea="True"
+             mc:Ignorable="d"
+             x:Class="PokeApp.Views.MainPage"
+             BackgroundColor="LightGray"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="70*"/>
+        </Grid.RowDefinitions>
+
+        <ff:CachedImage
+            Source="img_pokemon"
+            HorizontalOptions="CenterAndExpand"
+            />
+
+        <ff:CachedImage
+            Grid.Row="1"
+            Source="img_pokemons"
+            HorizontalOptions="CenterAndExpand"
+            Margin="0"/>
+
+        <CollectionView
+            x:Name="collectionTypes"
+            Grid.Row="2"
+            Margin="20"
+            ItemsSource="{Binding Types}"
+            SelectedItem="{Binding Type, Mode=TwoWay}"
+            SelectionMode="Single"
+            HeightRequest="30"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="CenterAndExpand">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout 
+                    Orientation="Horizontal" 
+                    HorizontalItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                        BackgroundColor="#3A5DA8 "
+                        CornerRadius="25"
+                        Padding="15, 3"
+                        HasShadow="False"
+                        VerticalOptions="CenterAndExpand">
+
+                        <Label 
+                                Text="{Binding Name}"
+                                TextColor="#FFF"
+                                FontSize="Small"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center"
+                                VerticalOptions="CenterAndExpand"
+                                Margin="0"/>
+
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <Frame
+            Grid.Row="3"
+            BackgroundColor="#F0F0F0"
+            Margin="20, 0, 20, 20"
+            Padding="10"
+            CornerRadius="20"
+            HasShadow="False"
+            VerticalOptions="FillAndExpand">
+
+            <CollectionView
+                x:Name="collectionPokemons"
+                Grid.Row="2"
+                Margin="20"
+                ItemsSource="{Binding Pokemons}"
+                SelectedItem="{Binding PokemonSelected, Mode=TwoWay}"
+                SelectionMode="Single"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="CenterAndExpand">
+
+                <CollectionView.EmptyView>
+                    <StackLayout
+                        VerticalOptions="CenterAndExpand">
+
+                        <ff:CachedImage
+                            Source="pokebola"
+                            HorizontalOptions="CenterAndExpand"/>
+
+                        <Label 
+                            Text="Selecione uma categoria de pokemons!"
+                            TextColor="Gray"
+                            FontSize="Medium"
+                            HorizontalTextAlignment="Center"
+                            HorizontalOptions="FillAndExpand"/>
+
+                    </StackLayout>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout 
+                        Span="2" 
+                        Orientation="Vertical" 
+                        HorizontalItemSpacing="10" 
+                        VerticalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.Header>
+                    <Label 
+                        Text="{Binding TypePokemons}"
+                        TextColor="#222"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="FillAndExpand"/>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+                            BackgroundColor="#FFD900"
+                            CornerRadius="10"
+                            Padding="10"
+                            HasShadow="False"
+                            VerticalOptions="CenterAndExpand">
+
+                            <Label 
+                                Text="{Binding Pokemon.Name}"
+                                TextColor="#222"
+                                FontSize="Medium"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center"
+                                VerticalOptions="CenterAndExpand"
+                                Margin="0"/>
+
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </Frame>
+            
+    </Grid>
+
+</ContentPage>
